@@ -24,7 +24,7 @@ while (have_posts()) {
     // echo get_the_ID();
 
 
-    // This code basically runs two functions. wp_get_post_parent_id() checks the parent of the page after get_the_ID() function fetches the page ID.
+    // This code basically runs two functions. wp_get_post_parent_id() checks the ID of the parent page after get_the_ID() function fetches the child page ID.
     // echo wp_get_post_parent_id(get_the_ID());
 
     $theParent = wp_get_post_parent_id(get_the_ID());
