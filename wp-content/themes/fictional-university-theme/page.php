@@ -6,7 +6,8 @@ get_header();
 while (have_posts()) {
     the_post(); ?>
 <div class="page-banner">
-    <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg'); ?>)"></div>
+    <div class="page-banner__bg-image"
+        style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg'); ?>)"></div>
     <div class="page-banner__content container container--narrow">
         <h1 class="page-banner__title">
             <?php the_title(); ?>
@@ -18,12 +19,35 @@ while (have_posts()) {
 </div>
 
 <div class="container container--narrow page-section">
+    <?php
+    // Get the post/page ID 
+    // echo get_the_ID();
+
+
+    // This code basically runs two functions. wp_get_post_parent_id() checks the parent of the page after get_the_ID() function fetches the page ID.
+    // echo wp_get_post_parent_id(get_the_ID());
+
+    $theParent = wp_get_post_parent_id(get_the_ID());
+    if ($theParent) {
+    ?>
     <div class="metabox metabox--position-up metabox--with-home-link">
         <p>
-            <a class="metabox__blog-home-link" href="#"><i class="fa fa-home" aria-hidden="true"></i> Back to About
-                Us</a> <span class="metabox__main">Our History</span>
+            <!-- Gets permalink using ID -->
+            <a class="metabox__blog-home-link" href="<?php echo get_permalink($theParent);?>">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                Back to
+                <!-- Gets the title based on the ID -->
+                <?php echo get_the_title($theParent); ?>
+            </a>
+            <span class="metabox__main">
+                <!-- Dynamic Page Title Function -->
+                <?php the_title(); ?>
+            </span>
         </p>
     </div>
+    <?php
+    }
+    ?>
 
     <!-- 
         <div class="page-links">
