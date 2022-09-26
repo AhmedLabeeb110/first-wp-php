@@ -33,7 +33,7 @@ while (have_posts()) {
     <div class="metabox metabox--position-up metabox--with-home-link">
         <p>
             <!-- Gets permalink using ID -->
-            <a class="metabox__blog-home-link" href="<?php echo get_permalink($theParent);?>">
+            <a class="metabox__blog-home-link" href="<?php echo get_permalink($theParent); ?>">
                 <i class="fa fa-home" aria-hidden="true"></i>
                 Back to
                 <!-- Gets the title based on the ID -->
@@ -49,15 +49,59 @@ while (have_posts()) {
     }
     ?>
 
-    <!-- 
-        <div class="page-links">
-        <h2 class="page-links__title"><a href="#">About Us</a></h2>
+   <?php 
+   //get_pages() function returns all the pages in memory
+    $testArray = get_pages(array(
+        'child_of' => get_the_ID()
+    ));
+
+    if ($theParent or $testArray) { ?>
+    <div class="page-links">
+        <h2 class="page-links__title"><a href="<?php echo get_permalink($theParent);?>"><?php echo get_the_title($theParent);?></a></h2>
         <ul class="min-list">
-            <li class="current_page_item"><a href="#">Our History</a></li>
-            <li><a href="#">Our Goals</a></li>
+            
+            <!-- What is an Associative Array? 
+              Answer: 
+
+              Normal Array: 
+
+              $animals = array('cat', 'dog', 'bird');
+
+              echo $animals[0]
+
+              Associative Array:
+
+              $animalSounds = array(
+                'cat' => 'meow',
+                'dog' => 'bark',
+                'bird' => 'chew'
+              );
+
+              echo $animalSounds[dog]
+            -->
+
+            <!-- This function lists every page on the website -->
+            <?php 
+            //  wp_list_pages();
+            ?>
+            <!-- Show Menu of Child Page Links using wp_list_pages(); function and Associative Arrays -->
+            <?php
+              if($theParent){
+                $findChildrenOf = $theParent;
+              } else {
+                $findChildrenOf = get_the_ID();
+              }
+
+              wp_list_pages(array(
+                'title_li' => NULL,
+                'child_of' => $findChildrenOf,
+                // Enables the option for chaging the order of page listings
+                'sort_column' => 'menu_order'
+              )); 
+            ?>
         </ul>
-    </div> 
-    -->
+    </div>
+   <?php } ?>
 
     <div class="generic-content">
         <?php the_content(); ?>
