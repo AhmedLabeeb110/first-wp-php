@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<!--This function automatically detects the language type on a website-->
+<html <?php language_attributes();?>>
 
 <head>
+    <!--This function automatically determines the type of characters being used on a website-->
+    <meta charset="<?php bloginfo('charset');?>">
+    <!-- This meta tag tells devices to use their native size -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--This let's WP be in control of the head section -->
     <?php wp_head(); ?>
 
-</head>
-
-<body>
+</head> 
+<!-- This function gives all sorts of useful information on classes, IDs, etc.l-->
+<body <?php body_class();?>>
 <header class="site-header">
       <div class="container">
         <h1 class="school-logo-text float-left">
