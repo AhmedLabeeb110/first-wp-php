@@ -84,14 +84,14 @@ while (have_posts()) {
             <?php 
             //  wp_list_pages();
             ?>
-            <!-- Show Menu of Child Page Links using wp_list_pages(); function and Associative Arrays -->
+            <!-- This condition checks if the child page has any parent page / also checks if the parent page has any children -->
             <?php
               if($theParent){
                 $findChildrenOf = $theParent;
               } else {
                 $findChildrenOf = get_the_ID();
               }
-
+              // Show Menu of Child Page Links using wp_list_pages(); function and Associative Arrays 
               wp_list_pages(array(
                 'title_li' => NULL,
                 'child_of' => $findChildrenOf,
