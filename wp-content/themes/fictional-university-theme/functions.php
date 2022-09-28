@@ -35,13 +35,6 @@ add_action('wp_enqueue_scripts', 'university_files');
 
 function university_features()
 {
-    // This function allows use to create custom dynamic NavBar
-    // Need two arguments for this
-    // For the first one just randomly add an argument and for the second one add more human friendly argument
-    register_nav_menu('headerMenuLocation', 'Header Menu Location');
-    // For Footer
-    register_nav_menu('footerLocationOne', 'Footer Location One');
-    register_nav_menu('footerLocationTwo', 'Footer Location Two');
     // Shows page name on tabs
     add_theme_support('title-tag');
 }
