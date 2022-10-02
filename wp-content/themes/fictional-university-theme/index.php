@@ -37,6 +37,8 @@ get_header(); ?>
     </div>
    <?php
   }
+  // This function creates pagination feature
+  // echo paginate_links();
  ?>
 </div>
 
