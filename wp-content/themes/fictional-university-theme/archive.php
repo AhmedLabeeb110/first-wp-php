@@ -7,10 +7,28 @@ get_header(); ?>
     style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg'); ?>)"></div>
   <div class="page-banner__content container container--narrow">
     <h1 class="page-banner__title">
-      Welcome to our blog!
+
+    <!-- is_category(); Determines whether the query is for an existing category archive page. -->
+    <!-- is_author(); Determines whether the query is for an existing author archive page. -->
+    <!-- single_cat_title(); Display or retrieve page title for category archive. -->
+    <!-- the_author(); Displays the name of the author of the current post. -->
+
+    <!-- the_archive_title(); enables all types of archives, for eg date, author and category based archives 
+         Formally
+    -->
+    <!-- the_archive_description(); function enables description of archives such as author, category, etc. description -->
+      <?php
+      // if (is_category()) {
+      //   single_cat_title();
+      // }
+      // if(is_author()){
+      //   echo "Posts By "; the_author();
+      // }
+      the_archive_title();
+      ?>
     </h1>
     <div class="page-banner__intro">
-      <p>Keep up with our lstest news.</p>
+      <p><?php the_archive_description();?></p>
     </div>
   </div>
 </div>
