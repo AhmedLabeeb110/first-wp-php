@@ -48,36 +48,49 @@
     <div class="full-width-split__inner">
       <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
       <?php
-        // To create a custom Wordpress query first create a variable, create a new instance of WP_Query(); function
-        // Pass an array(associative arguments) of arguments inside the WP_Query() for sending queries
+// To create a custom Wordpress query first create a variable, create a new instance of WP_Query(); function
+// Pass an array(associative arguments) of arguments inside the WP_Query() for sending queries
 
-        $homepagePosts = new WP_Query(array(
-          'posts_per_page' => 2
-        ));
-        
-        /*For completing the custom queries look inside the custom object($homepagePosts), then access have_posts() 
-        from the custom object and pass it inside the parentheses;
-        
-        Then access the_post(); from the custom object
-        */
-        
-        while ($homepagePosts->have_posts()) { 
-          $homepagePosts->the_post(); ?>
-        <li><?php the_title();?></li>
-      <?php
-       }
-      ?>
+$homepagePosts = new WP_Query(array(
+  'posts_per_page' => 2
+));
 
+/*For completing the custom queries look inside the custom object($homepagePosts), then access have_posts() 
+ from the custom object and pass it inside the parentheses;
+ 
+ Then access the_post(); from the custom object
+ */
+
+while ($homepagePosts->have_posts()) {
+  $homepagePosts->the_post(); ?>
       <div class="event-summary">
-        <a class="event-summary__date event-summary__date--beige t-center" href="#">
-          <span class="event-summary__month">Jan</span>
-          <span class="event-summary__day">20</span>
+        <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
+          <span class="event-summary__month">
+            <?php the_time('M')?>
+          </span>
+          <span class="event-summary__day">
+            <?php the_time('d')?>
+          </span>
         </a>
         <div class="event-summary__content">
-          <h5 class="event-summary__title headline headline--tiny"><a href="#">We Were Voted Best School</a></h5>
-          <p>For the 100th year in a row we are voted #1. <a href="#" class="nu gray">Read more</a></p>
+          <h5 class="event-summary__title headline headline--tiny">
+            <!-- This function is used to trip content for preview purposes. -->
+            <a href="<?php the_permalink(); ?>">
+              <?php the_title(); ?>
+            </a>
+          </h5>
+          <p>
+            <?php echo wp_trim_words(get_the_content(), 18)?>
+            <a href="<?php the_permalink(); ?>" class="nu gray"></a>
+          </p>
         </div>
       </div>
+      <?php
+       }
+      // Always run this function after custom queries are made. It cleans up custom queries and resets all the queries back to their default states. Running this function helps avoid conflicts.
+      wp_reset_postdata();
+      ?>
+
       <div class="event-summary">
         <a class="event-summary__date event-summary__date--beige t-center" href="#">
           <span class="event-summary__month">Feb</span>
