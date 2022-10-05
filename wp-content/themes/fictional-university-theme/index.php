@@ -1,49 +1,47 @@
-<!--Function in PHP/WP-->
-<!--
 <?php
-function greet($name, $color)
-{
-    echo "<p>Hi, my name is $name and my favourite color is $color.</p>";
-}
 
-greet('John', 'blue');
-greet('Jane', 'red');
-?> 
--->
+get_header(); ?>
 
-<!-- Built in bloginfo() function in PHP/WP -->
-<!--
-<h1><?php bloginfo('name'); ?></h1>
-<p><?php bloginfo('description'); ?></p> 
--->
+<div class="page-banner">
+  <div class="page-banner__bg-image"
+    style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg'); ?>)"></div>
+  <div class="page-banner__content container container--narrow">
+    <h1 class="page-banner__title">
+      Welcome to our blog!
+    </h1>
+    <div class="page-banner__intro">
+      <p>Keep up with our lstest news.</p>
+    </div>
+  </div>
+</div>
 
-<!-- Arrays in PHP/WP -->
-<!--
-<?php
-$names = array('Brad', 'John', 'Jane', 'Meowsalot');
+<div class="container container--narrow page-section">
+ <?php 
+  while(have_posts()){ 
+    the_post(); ?>
+    <div class="post-item">
+      <h2 class="headline headline--medium headline--post-title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h2>
+
+      <div class="metabox">
+        <!-- 1. This function creates a link with Archive of all the posts by an author. -->
+        <!-- 2. This function shows the date and time when the blogs were posted, the format can be manipulated by passing arguments inside the functions -->
+        <!-- 3. This function gets the category list of the post, if the post is posted in multiple categories, passing an argument like and, comma, etc. will show the categories separately -->
+        <p>Posted by <?php the_author_posts_link();?> on <?php the_time('n.j.y'); ?> in <?php echo get_the_category_list(', ')?></p>
+      </div>
+
+      <div class="generic-content">
+        <!-- This function shows an extract/excerpt of the main content -->
+        <?php the_excerpt();?>
+        <p><a class="btn btn--blue" href="<?php the_permalink();?>">Continue Reading &raquo;</a></p>
+      </div>
+    </div>
+   <?php
+  }
+  // This function creates pagination feature
+  // echo paginate_links();
+ ?>
+</div>
+
+<?php get_footer();
+
 ?>
-<p>Hi, my name is
-    <?php echo $names[0] ?>
-</p>
--->
-
-<!-- While loop in PHP/WP -->
-<!-- <?php
-$count = 1;
-
-while($count < 100){
-    echo "<li>$count</li>";
-    $count++;
-}
-?> -->
-
-<!-- While loop on Arrays/WP -->
-<!-- <?php
-$names = array('Brad', 'John', 'Jane', 'Meowsalot');
-$count = 0;
-
-while($count < count($names)){
-    echo "<li>Hi, my name is $names[$count]</li>";
-    $count++;
-}
-?> -->
