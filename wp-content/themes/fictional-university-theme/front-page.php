@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <div class="page-banner">
   <!-- How to import images in WordPress -->
   <div class="page-banner__bg-image"
@@ -40,7 +39,6 @@
               class="nu gray">Learn more</a></p>
         </div>
       </div>
-
       <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
     </div>
   </div>
@@ -102,8 +100,8 @@ while ($homepagePosts->have_posts()) {
           <p>Two of our professors have been in national news lately. <a href="#" class="nu gray">Read more</a></p>
         </div>
       </div>
-
-      <p class="t-center no-margin"><a href="#" class="btn btn--yellow">View All Blog Posts</a></p>
+       <!-- site_url(); fucntion gets the main website URL, but we can passdown a URL path of our choice . -->
+      <p class="t-center no-margin"><a href="<?php echo site_url('/blog');?>" class="btn btn--yellow">View All Blog Posts</a></p>
     </div>
   </div>
 </div>
