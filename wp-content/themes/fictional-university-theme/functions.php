@@ -47,7 +47,7 @@ add_action('after_setup_theme', 'university_features');
 function university_post_types()
 {
     // register_post_type(); is a built-in Wordpress function
-    // Registers a post type.
+    // Registers a post type
     // First argument - pass the preferred name for the custom post type, Second argument - asociative array describing the post type.
     register_post_type('event', array(
         'public' => true,
