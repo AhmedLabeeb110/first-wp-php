@@ -42,3 +42,22 @@ function university_features()
 // after_setup_theme, This hook is called during each page load, after the theme is initialized. It is generally used to perform basic setup, registration, and init actions for a theme.
 
 add_action('after_setup_theme', 'university_features');
+
+
+function university_post_types()
+{
+    // register_post_type(); is a built-in Wordpress function
+    // Registers a post type.
+    // First argument - pass the preferred name for the custom post type, Second argument - asociative array describing the post type.
+    register_post_type('event', array(
+        'public' => true,
+        'labels' => array(
+            'name' => 'Events'
+        ),
+        'menu_icon' => 'dashicons-calendar'
+    ));
+}
+
+// Run the init hook
+// Fires after WordPress has finished loading but before any headers are sent.
+add_action('init', 'university_post_types');
