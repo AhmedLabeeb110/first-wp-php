@@ -25,7 +25,7 @@
           <nav class="main-navigation">
             <ul>
               <!-- set up url best practise -->
-              <!-- is_page() function takes in the slug as argument and confirms the ID of a page -->
+              <!-- is_page(); function takes in the slug as argument and confirms the ID of a page -->
               <!-- This condition renders the color of the clicked page link based on this condition -->
               <!-- passing 0 as argument in the wp_get_post_parent_id(); will automatically look for the id of the opened page  -->
               <!-- Then compare with the parent page ID -->
