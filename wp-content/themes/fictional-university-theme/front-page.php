@@ -32,7 +32,14 @@
              </a>
              <div class="event-summary__content">
                 <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink();?>"><?php the_title();?></a></h5>
-                <p><?php echo wp_trim_words(get_the_content(), 18)?><a href="<?php the_permalink();?>"
+                <p>
+                  <?php if(has_excerpt()){
+                    echo get_the_excerpt();
+                     } else {
+                       echo wp_trim_words(get_the_content(), 18);
+                     }
+                  ?> 
+                  <a href="<?php the_permalink();?>"
                 class="nu gray">Learn more</a>
                 </p>
              </div>
@@ -41,7 +48,7 @@
          }
       ?>
 
-      <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+      <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event');?>" class="btn btn--blue">View All Events</a></p>
     </div>
   </div>
   <div class="full-width-split__two">
@@ -80,7 +87,23 @@ while ($homepagePosts->have_posts()) {
             </a>
           </h5>
           <p>
-            <?php echo wp_trim_words(get_the_content(), 18)?>
+            <!-- First way -->
+            <?php 
+            // if(has_excerpt()){
+            //  the_excerpt();
+            // } else {
+            //   echo wp_trim_words(get_the_content(), 18);
+            // }
+            ?>
+            <!-- Second way -->
+            <?php 
+            if(has_excerpt()){
+             echo get_the_excerpt();
+            } else {
+              echo wp_trim_words(get_the_content(), 18);
+            }
+            ?>
+            
             <a href="<?php the_permalink(); ?>" class="nu gray"></a>
           </p>
         </div>
@@ -90,18 +113,6 @@ while ($homepagePosts->have_posts()) {
       // Always run this function after custom queries are made. It cleans up custom queries and resets all the queries back to their default states. Running this function helps avoid conflicts.
       wp_reset_postdata();
       ?>
-
-      <div class="event-summary">
-        <a class="event-summary__date event-summary__date--beige t-center" href="#">
-          <span class="event-summary__month">Feb</span>
-          <span class="event-summary__day">04</span>
-        </a>
-        <div class="event-summary__content">
-          <h5 class="event-summary__title headline headline--tiny"><a href="#">Professors in the National Spotlight</a>
-          </h5>
-          <p>Two of our professors have been in national news lately. <a href="#" class="nu gray">Read more</a></p>
-        </div>
-      </div>
       <!-- site_url(); fucntion gets the main website URL, but we can passdown a URL path of our choice . -->
       <p class="t-center no-margin"><a href="<?php echo site_url('/blog');?>" class="btn btn--yellow">View All Blog
           Posts</a></p>

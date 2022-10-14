@@ -4,6 +4,7 @@
     // Registers a post type
     // First argument - pass the preferred name for the custom post type, Second argument - asociative array describing the post type.
     register_post_type('event', array(
+        'supports' => array('title', 'editor', 'excerpt'),
         'rewrite' => array('slug' => 'events'),
         'has_archive' => true,
         'public' => true,
