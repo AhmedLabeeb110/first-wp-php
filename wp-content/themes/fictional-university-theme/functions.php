@@ -15,7 +15,7 @@
 
 <?php
 function university_files()
-{
+{ 
     // wp_enqueue_style('university_main_styles', get_stylesheet_uri());
     // loading JS file using wp_enqueue_script function
     wp_enqueue_script('main-university-js', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
