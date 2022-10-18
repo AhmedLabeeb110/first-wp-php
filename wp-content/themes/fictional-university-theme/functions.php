@@ -42,3 +42,33 @@ function university_features()
 // after_setup_theme, This hook is called during each page load, after the theme is initialized. It is generally used to perform basic setup, registration, and init actions for a theme.
 
 add_action('after_setup_theme', 'university_features');
+
+// Pass the $query object as an argument so that it can be manipulated.
+function university_adjust_queries($query){
+  //is_admin() function checks if you are in the Admin dashboard
+  // we will pass !is_admin(); as argument, so the posts will show only when we are on the frontend  
+  //is_post_type_archive() checks the posts archive type
+  // $query->is_main_query() checks if the query is a default/main query 
+  if(!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()){
+    //First argument - Query parameter that we want to change(in this case 'meta_key')
+    //Second argument - data you want to show(in this case 'event_date')
+    $query->set('meta_key', 'event_date'); 
+    //Similar process for all queries.  
+    $query->set('orderby', 'meta_value_num');
+    $query->set('order', 'ASC');
+    $today = date('Ymd');
+    $query->set('meta_query', array(
+        array(
+          'key' => 'event_date',
+          'compare' => '>=',
+          'value' => $today,
+          'type' => 'numeric'
+        )
+        ));
+  }
+}
+
+// Fires after the query variable object is created, but before the actual query is run.
+// This helps us adjust the queries(this provides a refernce to the Wordpress Query object as well) 
+
+add_action('pre_get_posts', 'university_adjust_queries');
