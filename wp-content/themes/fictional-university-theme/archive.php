@@ -58,6 +58,7 @@ get_header(); ?>
   // This function creates pagination feature
   // echo paginate_links();
  ?>
+
 </div>
 
 <?php get_footer();
