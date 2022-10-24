@@ -45,6 +45,13 @@ add_action('after_setup_theme', 'university_features');
 
 // Pass the $query object as an argument so that it can be manipulated.
 function university_adjust_queries($query){
+
+  if (!is_admin() AND is_post_type_archive('program') AND is_main_query()){
+    $query->set('orderby', 'title');
+    $query->set('order', 'ASC');
+    $query->set('posts_per_page', -1);
+  }
+
   //is_admin() function checks if you are in the Admin dashboard
   // we will pass !is_admin(); as argument, so the posts will show only when we are on the frontend  
   //is_post_type_archive() checks the posts archive type
