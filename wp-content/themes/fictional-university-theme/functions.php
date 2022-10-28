@@ -1,6 +1,6 @@
 <?php
 
-// Important note -  Removed all HTML Code because of errors.
+// Important note -  Removed all HTML comments because of errors.
 
     // Using the add_action function WP allow's us to pass instruction; 
     // the first argument tells WP what type of function we are giving it,

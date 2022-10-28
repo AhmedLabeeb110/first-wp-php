@@ -36,6 +36,28 @@ while (have_posts()) {
      <div class="generic-content">
         <?php the_content();?>
      </div>
+
+     <!-- Showing related fields on the frontend from ACF  -->
+     <?php 
+       $relatedPrograms = get_field('related_programs');
+       // The print_r() function prints the information about a variable in a more human-readable way. Need to pass variable name as argument for output
+       
+      if ($relatedPrograms) {
+        echo '<hr class="section-break">';
+        echo '<h2 class="headline headline--medium">Related Program(s)</h2>';
+        echo '<ul class="link-list min-list">';
+        foreach($relatedPrograms as $program){ ?>
+         <!-- the_title() function will not work in this case, it only works inside the main WordPress loop.
+         
+         Pass a specific post ID that you want to render or do the best pratise of passing POST Object as an argument.
+         echo get_the_title($program); -->
+          <li><a href="<?php echo get_the_permalink($program); ?>"><?php echo get_the_title($program); ?></a></li>
+         <?php
+        }
+        echo '</ul>';
+      }
+      
+     ?>
    </div>
 <?php
 }
