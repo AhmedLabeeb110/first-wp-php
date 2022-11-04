@@ -40,6 +40,12 @@ function university_features()
 {
     // Shows page name on tabs
     add_theme_support('title-tag');
+    // Enables the Post Thumbnail option for default post types 
+    add_theme_support('post-thumbnails'); 
+    // This function allows us to create resized images. 
+    //For the first argument name the image, second and third define the size(width x height) that you want to convert your image, third do you want to crop the image or not 
+    add_image_size('professorLandscapes', 400, 260, true);
+    add_image_size('professorPortrait', 480, 650, true);
 }
 
 // after_setup_theme, This hook is called during each page load, after the theme is initialized. It is generally used to perform basic setup, registration, and init actions for a theme.

@@ -23,7 +23,18 @@ while (have_posts()) {
    
 
      <div class="generic-content">
-        <?php the_content();?>
+        <div class="row group">
+
+          <div class="one-third">
+            <!-- the_post_thumbnail(); function creates and HTML Image Tag and pulls in the featured image -->
+            <?php the_post_thumbnail();?>
+          </div>
+
+          <div class="two-thirds">
+            <?php the_content();?>
+          </div>
+
+        </div>
      </div>
 
      <!-- Showing related fields on the frontend from ACF  -->
