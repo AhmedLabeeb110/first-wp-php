@@ -27,7 +27,8 @@ while (have_posts()) {
 
           <div class="one-third">
             <!-- the_post_thumbnail(); function creates and HTML Image Tag and pulls in the featured image -->
-            <?php the_post_thumbnail();?>
+            <!-- Pass in the custom image size Name as an argument for loading puposes -->
+            <?php the_post_thumbnail('professorLandscape');?>
           </div>
 
           <div class="two-thirds">

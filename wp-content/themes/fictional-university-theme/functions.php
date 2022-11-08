@@ -44,7 +44,10 @@ function university_features()
     add_theme_support('post-thumbnails'); 
     // This function allows us to create resized images. 
     //For the first argument name the image, second and third define the size(width x height) that you want to convert your image, third do you want to crop the image or not 
-    add_image_size('professorLandscapes', 400, 260, true);
+    
+    // Tutorial No. 42 - Usually Worpress cuts towards the center. but this can be controlled as well, but this is not the best practise:
+    // add_image_size('professorLandscape', 400, 260, array('left', 'top'));         v 
+    add_image_size('professorLandscape', 400, 260, true);
     add_image_size('professorPortrait', 480, 650, true);
 }
 
