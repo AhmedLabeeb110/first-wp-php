@@ -46,9 +46,10 @@ function university_features()
     //For the first argument name the image, second and third define the size(width x height) that you want to convert your image, third do you want to crop the image or not 
     
     // Tutorial No. 42 - Usually Worpress cuts towards the center. but this can be controlled as well, but this is not the best practise:
-    // add_image_size('professorLandscape', 400, 260, array('left', 'top'));         v 
+    // add_image_size('professorLandscape', 400, 260, array('left', 'top'));          
     add_image_size('professorLandscape', 400, 260, true);
     add_image_size('professorPortrait', 480, 650, true);
+    add_image_size('pageBanner', 1500, 350, true);
 }
 
 // after_setup_theme, This hook is called during each page load, after the theme is initialized. It is generally used to perform basic setup, registration, and init actions for a theme.
