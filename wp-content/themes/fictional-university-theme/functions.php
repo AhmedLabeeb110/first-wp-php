@@ -16,6 +16,52 @@
 
     // get_theme_file_uri function allows loading custom CSS files
 
+    // $args as in arguments, we can name the arguments anything we want. In this case, we are passing some associative arrays as arguments by passing $args. 
+    // $args = NULL, this makes the arguments optional
+    function pageBanner($args = NULL){
+      if (!$args['title']) {
+        $args['title'] = get_the_title();
+      }
+     
+      if (!$args['subtitle']) {
+        $args['subtitle'] = get_field('page_banner_subtitle');
+      }
+     
+      if (!$args['photo']) {
+        if (get_field('page_banner_background_image') AND !is_archive() AND !is_home() ) {
+          $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
+        } else {
+          $args['photo'] = get_theme_file_uri('/images/ocean.jpg');
+        }
+      }
+
+      
+      ?>
+      <div class="page-banner">
+
+<!-- Create a variable called, run the get_field function inside it, 
+     and pass the custom field name as an argument that you want to show on the front-end
+     $pageBannerImage = get_field('page_banner_background_image');
+
+     then echo the $pageBannerImage['url'](this is echoed out as array - url is one of the array values, the url will give us a path to the image)
+     
+     To echo a specific sized image: $pageBannerImage['sizes']['pageBanner']
+ -->
+ <div class="page-banner__bg-image"
+     style="background-image: url(<?php echo $args['photo']?>);">
+ </div>
+ <div class="page-banner__content container container--narrow">
+     <h1 class="page-banner__title">
+        <!-- echo the array value that you want to show on the front-end of your website -->
+         <?php echo $args['title'] ?>
+     </h1>
+     <div class="page-banner__intro">
+         <p><?php echo $args['subtitle']?></p>
+     </div>
+ </div>
+</div>
+    <?php } 
+
 
 function university_files()
 { 

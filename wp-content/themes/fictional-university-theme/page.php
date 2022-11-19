@@ -4,22 +4,19 @@
 get_header();
 
 while (have_posts()) {
-    the_post(); ?>
-<div class="page-banner">
-    <div class="page-banner__bg-image"
-        style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg'); ?>)"></div>
-    <div class="page-banner__content container container--narrow">
-        <h1 class="page-banner__title">
-            <?php the_title(); ?>
-        </h1>
-        <div class="page-banner__intro">
-            <p>DON'T FORGET TO REPLACE ME LATER.</p>
-        </div>
-    </div>
-</div>
+    the_post(); 
+    //This function comes from the functions.php, this function outputs the page banner.
+    pageBanner(array(
+        // Can manipulate the default fields like this.
+        'title' => 'Hello there this is the title',
+        // 'photo' => 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
+        // 'subtitle' => 'The subtitle goes here'
+    ));
+    ?>  
+ 
 
 <div class="container container--narrow page-section">
-    <?php
+    <?php 
     // Get the post/page ID 
     // echo get_the_ID();
 
