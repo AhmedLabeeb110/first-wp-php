@@ -1,37 +1,11 @@
 <?php
 
-get_header(); ?>
-
-<div class="page-banner">
-  <div class="page-banner__bg-image"
-    style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg'); ?>)"></div>
-  <div class="page-banner__content container container--narrow">
-    <h1 class="page-banner__title">
-
-    <!-- is_category(); Determines whether the query is for an existing category archive page. -->
-    <!-- is_author(); Determines whether the query is for an existing author archive page. -->
-    <!-- single_cat_title(); Display or retrieve page title for category archive. -->
-    <!-- the_author(); Displays the name of the author of the current post. -->
-
-    <!-- the_archive_title(); enables all types of archives, for eg date, author and category based archives 
-         Formally
-    -->
-    <!-- the_archive_description(); function enables description of archives such as author, category, etc. description -->
-      <?php
-      // if (is_category()) {
-      //   single_cat_title();
-      // }
-      // if(is_author()){
-      //   echo "Posts By "; the_author();
-      // }
-      the_archive_title();
-      ?>
-    </h1>
-    <div class="page-banner__intro">
-      <p><?php the_archive_description();?></p>
-    </div>
-  </div>
-</div>
+get_header(); 
+pageBanner(array(
+  'title' => get_the_archive_title(),
+  'subtitle' => get_the_archive_description() 
+));
+?>
 
 <div class="container container--narrow page-section">
  <?php 
