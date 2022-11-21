@@ -40,39 +40,14 @@
         ));
 
         while($homepageEvents->have_posts() ){ 
-          $homepageEvents->the_post(); ?>
-      <div class="event-summary">
-        <a class="event-summary__date t-center" href="#">
-          <!-- This function comes from the ACF(Advanced Custom Fields) plugin 
-                     the_field('event_date');
-                     get_field() as well.
-                -->
-          <span class="event-summary__month">
-            <?php 
-                  $eventDate = new DateTime(get_field('event_date'));
-                  echo $eventDate->format('M')
-                ?>
-          </span>
-          <span class="event-summary__day">
-            <?php echo $eventDate->format('d') ?>
-          </span>
-        </a>
-        <div class="event-summary__content">
-          <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink();?>">
-              <?php the_title();?>
-            </a></h5>
-          <p>
-            <?php if(has_excerpt()){
-                    echo get_the_excerpt();
-                     } else {
-                       echo wp_trim_words(get_the_content(), 18);
-                     }
-                  ?>
-            <a href="<?php the_permalink();?>" class="nu gray">Learn more</a>
-          </p>
-        </div>
-      </div>
-      <?php
+          $homepageEvents->the_post(); 
+           //This function is used to collect parts of a template
+           //At least one argument must be passed inside the function, and that argument should be the folder and name path of the file that we would like to load. 
+           //Note: do not include .php on the file path 
+            // get_template_part('template-parts/event');
+           //For the second argument pass any word that you want to append with the path(this word will be appended with a dash in the front)
+           //Passing second argument can be useful for outputting posts dynamically. 
+           get_template_part('template-parts/content', 'event');
          }
       ?>
 
