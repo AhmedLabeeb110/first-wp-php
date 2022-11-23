@@ -10,7 +10,7 @@ pageBanner(array(
 <div class="container container--narrow page-section">
     <?php
 $today = date('Ymd');
-$pastEvents = new WP_Query(array(
+  $pastEvents = new WP_Query(array(
     //get_query_var() function can be used to get all sorts of information from the URL(in this current page URL).
     //First Argument - echo posts based on the page ID(paged in this case).
     //Second Argument - pass a number as argument, the number will be used if WordPress can not find the data dynamically  
