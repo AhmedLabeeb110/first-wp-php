@@ -109,22 +109,45 @@ class Search {
     this.openButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".js-search-trigger");
     this.closeButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay__close");
     this.searchOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay");
-    // Calling the events method here makes sure that the event listeners get added to the page right away 
+    // Calling the events method here makes sure that the event listeners get added to the page right away
     this.events();
+    this.isOverlayOpen = false;
   }
 
   // 2. Events
   events() {
     this.openButton.on("click", this.openOverlay.bind(this));
     this.closeButton.on("click", this.closeOverlay.bind(this));
+    //For adding an action based on Key Press, we need to target the entire document.
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("keydown", this.keyPressDispatcher.bind(this));
   }
 
   // 3. methods (function, action...)
+
+  //This is how you can find the keyCode
+  // keyPressDispatcher(e) {
+  //   console.log(e.keyCode);
+  // }
+
+  keyPressDispatcher(e) {
+    if (e.keyCode == 83 && !this.isOverlayOpen) {
+      this.openOverlay();
+    }
+    if (e.keyCode == 27 && this.isOverlayOpen) {
+      this.closeOverlay();
+    }
+  }
   openOverlay() {
     this.searchOverlay.addClass("search-overlay--active");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").addClass("body-no-scroll");
+    console.log("Our open methid just ran!");
+    this.isOverlayOpen = true;
   }
   closeOverlay() {
     this.searchOverlay.removeClass("search-overlay--active");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").removeClass("body-no-scroll");
+    console.log("Our close methid just ran!");
+    this.isOverlayOpen = false;
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (Search);
