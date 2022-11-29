@@ -109,9 +109,11 @@ class Search {
     this.openButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".js-search-trigger");
     this.closeButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay__close");
     this.searchOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay");
+    this.searchField = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-term");
     // Calling the events method here makes sure that the event listeners get added to the page right away
     this.events();
     this.isOverlayOpen = false;
+    this.typingTimer;
   }
 
   // 2. Events
@@ -120,9 +122,25 @@ class Search {
     this.closeButton.on("click", this.closeOverlay.bind(this));
     //For adding an action based on Key Press, we need to target the entire document.
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("keydown", this.keyPressDispatcher.bind(this));
+    this.searchField.on("keydown", this.typingLogic.bind(this));
   }
 
   // 3. methods (function, action...)
+
+  // setTimeout function takes in two arguments
+  // First Argument - function name or fully defined function
+  // Second Argument - duration after the function should run
+  // Examples:
+  // setTimeout(function(){}, delay) or setTimeout(functionName, delay)
+
+  // clearTimeout function clears the ongoing setTimeout function that is about to show an output
+
+  typingLogic() {
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(function () {
+      console.log("This is a timeout test");
+    }, 2000);
+  }
 
   //This is how you can find the keyCode
   // keyPressDispatcher(e) {
