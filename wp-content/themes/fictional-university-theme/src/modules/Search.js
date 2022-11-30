@@ -3,6 +3,7 @@ import $ from "jquery";
 class Search {
   // 1. describe and create/initiate our object
   constructor() {
+    this.resultsDiv = $("#search-overlay__results");
     this.openButton = $(".js-search-trigger");
     this.closeButton = $(".search-overlay__close");
     this.searchOverlay = $(".search-overlay");
@@ -10,6 +11,8 @@ class Search {
     // Calling the events method here makes sure that the event listeners get added to the page right away
     this.events();
     this.isOverlayOpen = false;
+    this.isSpinnerVisible = false;
+    this.previousValue;
     this.typingTimer;
   }
 
@@ -19,7 +22,9 @@ class Search {
     this.closeButton.on("click", this.closeOverlay.bind(this));
     //For adding an action based on Key Press, we need to target the entire document.
     $(document).on("keydown", this.keyPressDispatcher.bind(this));
-    this.searchField.on("keydown", this.typingLogic.bind(this));
+    // The keydown event fires so immediately after keypress that it doesn't give a change the search field to update it's value,
+    // so for searchfields we will need to use the keyup event
+    this.searchField.on("keyup", this.typingLogic.bind(this));
   }
 
   // 3. methods (function, action...)
@@ -33,10 +38,27 @@ class Search {
   // clearTimeout function clears the ongoing setTimeout function that is about to show an output
 
   typingLogic() {
-    clearTimeout(this.typingTimer)
-    this.typingTimer = setTimeout(function () {
-      console.log("This is a timeout test");
-    }, 2000);
+    if (this.searchField.val() != this.previousValue) {
+      clearTimeout(this.typingTimer);
+
+      if (this.searchField.val()) {
+        if (!this.isSpinnerVisible) {
+          this.resultsDiv.html('<div class="spinner-loader"></div>');
+          this.isSpinnerVisible = true;
+        }
+        this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+      } else {
+        this.resultsDiv.html("");
+        this.isSpinnerVisible = false;
+      }
+    }
+
+    this.previousValue = this.searchField.val();
+  }
+
+  getResults() {
+    this.resultsDiv.html("Imagine real search results here.");
+    this.isSpinnerVisible = false;
   }
 
   //This is how you can find the keyCode
@@ -45,7 +67,7 @@ class Search {
   // }
 
   keyPressDispatcher(e) {
-    if (e.keyCode == 83 && !this.isOverlayOpen) {
+    if (e.keyCode == 83 && !this.isOverlayOpen && !$("input, textarea").is(':focus')) {
       this.openOverlay();
     }
     if (e.keyCode == 27 && this.isOverlayOpen) {
