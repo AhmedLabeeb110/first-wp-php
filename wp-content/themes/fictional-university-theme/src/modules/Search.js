@@ -57,9 +57,13 @@ class Search {
   }
 
   getResults() {
-    $.getJSON('http://fictional-university.local/wp-json/wp/v2/posts?search=' + this.searchField.val(), function(posts){
-      alert(posts[0].title.rendered);
-    })
+    $.getJSON(
+      "http://fictional-university.local/wp-json/wp/v2/posts?search=" +
+        this.searchField.val(),
+      function (posts) {
+        alert(posts[0].title.rendered);
+      }
+    );
   }
 
   //This is how you can find the keyCode
@@ -68,7 +72,11 @@ class Search {
   // }
 
   keyPressDispatcher(e) {
-    if (e.keyCode == 83 && !this.isOverlayOpen && !$("input, textarea").is(':focus')) {
+    if (
+      e.keyCode == 83 &&
+      !this.isOverlayOpen &&
+      !$("input, textarea").is(":focus")
+    ) {
       this.openOverlay();
     }
     if (e.keyCode == 27 && this.isOverlayOpen) {
