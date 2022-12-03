@@ -1,0 +1,17 @@
+How to check JS posts and pages JSON data:
+
+10 most recent posts: http://fictional-university.local/wp-json/wp/v2/posts
+
+10 most recent pages: http://fictional-university.local/wp-json/wp/v2/pages
+
+For example, if you want to check the two most recent posts: 
+
+http://fictional-university.local/wp-json/wp/v2/posts?per_page=2
+
+If you know the ID of the post that you want to show:
+
+http://fictional-university.local/wp-json/wp/v2/posts/7
+
+If you want to search something based on strings:
+
+http://fictional-university.local/wp-json/wp/v2/posts?search=searchstring
