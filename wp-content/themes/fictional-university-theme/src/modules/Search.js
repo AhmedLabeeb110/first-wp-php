@@ -56,12 +56,17 @@ class Search {
     this.previousValue = this.searchField.val();
   }
 
+  //Instead of binding we can use Arrow functions
   getResults() {
     $.getJSON(
-      "http://fictional-university.local/wp-json/wp/v2/posts?search=" +
-        this.searchField.val(),
-      function (posts) {
-        alert(posts[0].title.rendered);
+      "http://fictional-university.local/wp-json/wp/v2/posts?search=" + this.searchField.val(), (posts) => {
+        // var testArray = ["red", "orange", "yellow"];
+        this.resultsDiv.html(`
+         <h2 class="search-overlay__section-title">General Information</h2>
+         <ul class="link-list min-list">
+           ${posts.map(item => `<li><a href="${item.link}">${item.title.rendered}</a></li>`).join('')}
+         </ul>
+        `);
       }
     );
   }
