@@ -3,6 +3,7 @@ import $ from "jquery";
 class Search {
   // 1. describe and create/initiate our object
   constructor() {
+    this.addSearchHTML();
     this.resultsDiv = $("#search-overlay__results");
     this.openButton = $(".js-search-trigger");
     this.closeButton = $(".search-overlay__close");
@@ -58,15 +59,23 @@ class Search {
 
   //Instead of binding we can use Arrow functions
   getResults() {
-    $.getJSON( 
+    $.getJSON(
       //universityData comes from the JS file we manipulated through functions.php
-      universityData.root_url + "wp-json/wp/v2/posts?search=" + this.searchField.val(), (posts) => {
-        // var testArray = ["red", "orange", "yellow"];
+      universityData.root_url + "/wp-json/wp/v2/posts?search=" + this.searchField.val(), (posts) => {
         this.resultsDiv.html(`
          <h2 class="search-overlay__section-title">General Information</h2>
-          ${posts.length ? '<ul class="link-list min-list">' : '<p>No general information matches that search.</p>'}
-           ${posts.map(item => `<li><a href="${item.link}">${item.title.rendered}</a></li>`).join('')}
-           ${posts.length ? '</ul>' : ''}
+          ${
+            posts.length
+              ? '<ul class="link-list min-list">'
+              : "<p>No general information matches that search.</p>"
+          }
+           ${posts
+             .map(
+               (item) =>
+                 `<li><a href="${item.link}">${item.title.rendered}</a></li>`
+             )
+             .join("")}
+           ${posts.length ? "</ul>" : ""}
         `);
         this.isSpinnerVisible = false;
       }
@@ -94,6 +103,13 @@ class Search {
   openOverlay() {
     this.searchOverlay.addClass("search-overlay--active");
     $("body").addClass("body-no-scroll");
+    this.searchField.val('');
+    //The JQuery focus method has been depreciated, however the JS Focus method still works
+    //The line of code below will not work 
+    //Look into this later
+    // setTimeout(() => this.searchField.focus(), 301);
+    //But the line of code below will work
+    setTimeout(() => this.searchField.trigger('focus'), 301);
     console.log("Our open methid just ran!");
     this.isOverlayOpen = true;
   }
@@ -102,6 +118,24 @@ class Search {
     $("body").removeClass("body-no-scroll");
     console.log("Our close methid just ran!");
     this.isOverlayOpen = false;
+  }
+
+  //appending allows us to add HTML at the bottom of the HTML body tag
+  addSearchHTML() {
+    $("body").append(`
+    <div class=" search-overlay">
+    <div class="search-overlay__top">
+      <div class="container">
+       <div class="fa fa-search search-overlay__icon" aria-hidden="true"></div>
+       <input type="text" class="search-term" placeholder="What are you looking for?" id="search-term">
+       <div class="fa fa-window-close search-overlay__close" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="container">
+     <div id="search-overlay__results"></div>
+    </div>
+ </div>
+    `);
   }
 }
 
