@@ -74,7 +74,8 @@ class Search {
        ${combinedResults
          .map(
            (item) =>
-             `<li><a href="${item.link}">${item.title.rendered}</a></li>`
+           //Got the item.type from Postman API call
+             `<li><a href="${item.link}">${item.title.rendered}</a> ${item.type == 'post' ? `by ${item.authorName}`: ''}</li>`
          )
          .join("")}
        ${combinedResults.length ? "</ul>" : ""}

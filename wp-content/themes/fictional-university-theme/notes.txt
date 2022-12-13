@@ -15,3 +15,13 @@ http://fictional-university.local/wp-json/wp/v2/posts/7
 If you want to search something based on strings:
 
 http://fictional-university.local/wp-json/wp/v2/posts?search=searchstring
+
+
+Important Note:
+
+do_action creates an action hook, add_action executes hooked functions when that hook is called
+
+
+Important Note:
+
+There are many other built-in Rest API URLs, you can find them on Wordpress Docs

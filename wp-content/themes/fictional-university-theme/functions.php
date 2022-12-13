@@ -18,6 +18,22 @@
 
 // $args as in arguments, we can name the arguments anything we want. In this case, we are passing some associative arrays as arguments by passing $args. 
 // $args = NULL, this makes the arguments optional
+
+
+function university_custom_rest()
+{
+  // This function takes in three arguments
+  // First argument: the post type you want ot customize
+  // Second argument: Whatever you want ot name the new field
+  // Third argument: The data you want to show. In this case, get_the_author(); (Retrieves the author of the current post).
+  register_rest_field('post', 'authorName', array(
+    'get_callback' => function () { return get_the_author(); }
+  ));
+}
+
+// Fires when preparing to serve a REST API request.
+add_action('rest_api_init', 'university_custom_rest');
+
 function pageBanner($args = NULL)
 {
   if (!$args['title']) {
