@@ -20,6 +20,11 @@
 // $args = NULL, this makes the arguments optional
 
 
+
+// This built-in Wordpress Function Retrieves the path of a file in the theme.
+
+require get_theme_file_path('/inc/search-route.php');
+
 function university_custom_rest()
 {
   // This function takes in three arguments
