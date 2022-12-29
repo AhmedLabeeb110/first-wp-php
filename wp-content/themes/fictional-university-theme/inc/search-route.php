@@ -38,14 +38,14 @@ function universityRegisterSearch()
 
 // This is how we can manipulate the type of data we would like to show
 
-// Pass a parameter called data, but you can call it whatever you want. 
+// Pass a parameter called data, but you can call it whatever you want . 
 // $data is an array WordPress puts together, and within this array we can access any parameters passed to the API URL
 function universitySearchResults($data)
 {
     $professors = new WP_Query(
         array(
             'post_type' => 'professor',
-            // lowercase s stands for search
+            // lowercase s stands for search, enables the search functionality
             // 'term' is basically this part of the search query URL, you can name it anything: 
             // http://fictional-university.local/wp-json/university/v1/search?term=searchterm
             // sanitize_text_field is built-in Wordpress function, Sanitizes a string from user input or from the database. It helps prevent harmful user inputs.
