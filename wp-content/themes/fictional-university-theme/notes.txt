@@ -12,7 +12,7 @@ If you know the ID of the post that you want to show:
 
 http://fictional-university.local/wp-json/wp/v2/posts/7
 
-If you want to search something based on strings:
+If you want to search something based on strings(the word search after the question mark can be named as preferred):
 
 http://fictional-university.local/wp-json/wp/v2/posts?search=searchstring
 
