@@ -42,9 +42,11 @@ function universityRegisterSearch()
 // $data is an array WordPress puts together, and within this array we can access any parameters passed to the API URL
 function universitySearchResults($data)
 {
-    $professors = new WP_Query(
+    $mainQuery = new WP_Query(
         array(
-            'post_type' => 'professor',
+            // This is how you query multiple post types 
+            //set the post_type to equal an array, list out an array of post types you want to return 
+            'post_type' => array('post', 'page', 'professor', 'program', 'campus', 'event'),
             // lowercase s stands for search, enables the search functionality
             // 'term' is basically this part of the search query URL, you can name it anything: 
             // http://fictional-university.local/wp-json/university/v1/search?term=searchterm
@@ -53,21 +55,62 @@ function universitySearchResults($data)
         )
     );
 
-    $professorResults = array();
+    //This is the array that we will populate by looping. Inside this associative array we will separately store each post type retuns 
+    $results = array(
+       'generalInfo' => array(),
+       'professors' => array(),
+       'programs' => array(),
+       'events' => array(),
+       'campuses' => array()
+    );
 
-    while ($professors->have_posts()) {
-        $professors->the_post();
+    while ($mainQuery->have_posts()) {
+        $mainQuery->the_post();
         // This is built-in PHP function
         // It takes in two arguments
         // 1st - the array you want to add on to, in this case $professorResults
         // 2nd - The data you want to show
-        // The array_push() function inserts one or more elements to the end of an array. 
-        array_push($professorResults, array(
-            'title' => get_the_title(),
-            'permalink' => get_the_permalink()
-        )
-        );
+        // The array_push() function inserts one or more elements to the end of an array. In this case, we are pushing the array inside $results' sub arrays 
+        if (get_post_type() == 'post' or get_post_type() == 'page') {
+            array_push($results['generalInfo'], array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink()
+            )
+            );
+        }
+
+        if (get_post_type() == 'professor') {
+            array_push($results['professors'], array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink()
+            )
+            );
+        }
+
+        if (get_post_type() == 'program') {
+            array_push($results['programs'], array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink()
+            )
+            );
+        }
+
+        if (get_post_type() == 'campus') {
+            array_push($results['campuses'], array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink()
+            )
+            );
+        }
+
+        if (get_post_type() == 'event') {
+            array_push($results['events'], array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink()
+            )
+            );
+        }
     }
 
-    return $professorResults;
+    return $results;
 }
