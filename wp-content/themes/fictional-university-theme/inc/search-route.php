@@ -4,7 +4,7 @@ add_action('rest_api_init', 'universityRegisterSearch');
 
 function universityRegisterSearch()
 {
-    // This is a built-in Wordpress function
+    // This is a built-in Wordpress function.
     // First Argument - namespace
     // Second Argument - route
     // Third Argument - Array that describes what should happen when someone visits the URL
