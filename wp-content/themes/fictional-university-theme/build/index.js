@@ -127,7 +127,7 @@ class Search {
     //For adding an action based on Key Press, we need to target the entire document.
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("keydown", this.keyPressDispatcher.bind(this));
     // The keydown event fires so immediately after keypress that it doesn't give a change the search field to update it's value,
-    // so for searchfields we will need to use the keyup event
+    // so for searchfields we will need to use the keyup event.
     this.searchField.on("keyup", this.typingLogic.bind(this));
   }
 
