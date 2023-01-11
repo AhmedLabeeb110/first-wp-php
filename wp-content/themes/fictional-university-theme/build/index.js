@@ -139,7 +139,7 @@ class Search {
   // Examples:
   // setTimeout(function(){}, delay) or setTimeout(functionName, delay)
 
-  // clearTimeout function clears the ongoing setTimeout function that is about to show an output
+  // clearTimeout function clears the ongoing setTimeout function that is about to show an output.
 
   typingLogic() {
     if (this.searchField.val() != this.previousValue) {
