@@ -115,7 +115,7 @@ function universitySearchResults($data)
             if(has_excerpt()){
                 $description = get_the_excerpt();
                  } else {
-                   echo wp_trim_words(get_the_content(), 18);
+               $description = wp_trim_words(get_the_content(), 18);
             }
             ;
             array_push($results['events'], array(
