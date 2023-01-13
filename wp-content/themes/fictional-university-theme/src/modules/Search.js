@@ -138,7 +138,7 @@ class Search {
            ${
             results.events.length
               ? ''
-              : `No events match the search <a href="${universityData.root_url}/events">View all campuses</a>`
+              : `No events match the search <a href="${universityData.root_url}/events">View all events</a>`
           }
            ${results.events
              .map(

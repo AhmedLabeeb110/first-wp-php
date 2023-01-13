@@ -203,7 +203,7 @@ class Search {
            ${results.campuses.length ? "</ul>" : ""}
 
            <h2 class="search-overlay__section-title">Events</h2>
-           ${results.events.length ? '' : `No events match the search <a href="${universityData.root_url}/events">View all campuses</a>`}
+           ${results.events.length ? '' : `No events match the search <a href="${universityData.root_url}/events">View all events</a>`}
            ${results.events.map(item =>
       //Got the item.type from Postman API call
       `<div class="event-summary">
