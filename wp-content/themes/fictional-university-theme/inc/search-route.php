@@ -129,5 +129,39 @@ function universitySearchResults($data)
         }
     }
 
+    $programRelationshipQuery = new WP_Query(array(
+        'post_type' => 'professor',
+        'meta_query' => array(
+           array(
+            'key' => 'related_programs',
+            'compare' => 'LIKE',
+            'value' => '"97"'
+           )
+        )
+      )
+    );
+
+    while($programRelationshipQuery->have_posts()){
+        $programRelationshipQuery->the_post();
+
+        if (get_post_type() == 'professor') {
+            array_push($results['professors'], array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink(),
+                // Returns the post thumbnail URL.
+                // First Argument: The post you want to show, passing 0 will get the image of the current post
+                // Second Argument: The size of image you want to show
+                'image' => get_the_post_thumbnail_url(0, 'professorLandscape')
+            )
+            );
+        }
+    }
+
+    //array_unique() is a default PHP function
+    //This function takes in two arguments
+    //For the first argument pass the array you want to work with.
+    //For the second argument pass a filter argument like the code below
+    $results['professors'] = array_unique($results['professors'], SORT_REGULAR);
+
     return $results;
 }
