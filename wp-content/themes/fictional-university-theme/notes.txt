@@ -16,6 +16,11 @@ If you want to search something based on strings(the word search after the quest
 
 http://fictional-university.local/wp-json/wp/v2/posts?search=searchstring
 
+This is how you can access/load/search all the pages and the posts of a website based on search terms
+
+http://fictional-university.local/?s=searchterm
+
+
 
 Important Note:
 

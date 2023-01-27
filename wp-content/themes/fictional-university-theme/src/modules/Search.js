@@ -202,6 +202,8 @@ class Search {
     setTimeout(() => this.searchField.trigger('focus'), 301);
     console.log("Our open methid just ran!");
     this.isOverlayOpen = true;
+    // This keeps the openOverlay method enabled when js is enabled in the browsers and prevents page redirection when JS is enabled. vice versa
+    return false
   }
   closeOverlay() {
     this.searchOverlay.removeClass("search-overlay--active");

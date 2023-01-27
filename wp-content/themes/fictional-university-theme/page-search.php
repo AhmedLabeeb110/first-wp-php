@@ -100,9 +100,29 @@ while (have_posts()) {
     </div>
    <?php } ?>
 
+   <!-- It is possible to search through WP API enpoints with the help of forms and inputs  -->
     <div class="generic-content">
-        <?php the_content(); ?>
-    </div>
+        <!-- site_url(); Retrieves the URL for the current site where WordPress 
+        application files (e.g. wp-blog-header.php or the wp-admin/ folder) are accessible. 
+    
+        passing '/' as parameter will echo the website url as the Action URL
+        -->
+
+        <!-- Quick Security Tip: 
+        esc_url() Checks and cleans a URL.
+
+        For manually outputting a URL from the we should the function in another function called esc_url()
+
+        http://fictional-university.local/?s=math
+        -->
+        <form class="search-form" method="get" action="<?php echo esc_url(site_url('/'));?>">
+        <label for="s" class="headline headline--medium">Perform a New Search</label>
+        <div class="search-form-row">
+        <input placeholder="What are you looking for" class="s" id="s" type="search" name="s"></input>
+        <input class="search-submit" type="submit" value="Search"></input>
+        </div>
+        </form>
+    </div> 
 </div>
 <?php
 }
