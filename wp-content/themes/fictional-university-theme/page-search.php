@@ -115,13 +115,9 @@ while (have_posts()) {
 
         http://fictional-university.local/?s=math
         -->
-        <form class="search-form" method="get" action="<?php echo esc_url(site_url('/'));?>">
-        <label for="s" class="headline headline--medium">Perform a New Search</label>
-        <div class="search-form-row">
-        <input placeholder="What are you looking for" class="s" id="s" type="search" name="s"></input>
-        <input class="search-submit" type="submit" value="Search"></input>
-        </div>
-        </form>
+        
+        <!-- This function automatically loads the search form created under the name of searchform.php, this is a built-in function by WordPress -->
+       <?php get_search_form(); ?>
     </div> 
 </div>
 <?php
