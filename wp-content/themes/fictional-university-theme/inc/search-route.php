@@ -199,12 +199,12 @@ function universitySearchResults($data)
                 }
             }
 
-            //array_unique() is a default PHP function
+            //array_unique() is a default PHP function, removes duplicate values from an array
             //This function takes in two arguments
             //For the first argument pass the array you want to work with.
             //For the second argument pass a filter argument like the code below
-            $results['professors'] = array_unique($results['professors'], SORT_REGULAR);
-            // The array_values() is an inbuilt PHP function is used to get an array of values from another array that may contain key-value pairs or just values.
+            $results['professors'] = array_values(array_unique($results['professors'], SORT_REGULAR));
+            // The array_values() is an inbuilt PHP function, it is used to get an array of values from another array or objects(for WordPress) that may contain key-value pairs or just values.
             // The function creates another array where it stores all the values and by default assigns numerical keys to the values.Nov 30, 2021
         $results['events'] = array_values(array_unique($results['events'], SORT_REGULAR));
 

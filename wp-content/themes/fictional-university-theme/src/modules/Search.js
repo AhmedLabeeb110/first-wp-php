@@ -105,17 +105,17 @@ class Search {
                 ? '<ul class="professor-cards">'
                 : `<p> No professors match that search.</p>`
             }
-             ${results.professors
-               .map(
-                 (item) =>
-                 `<li class="professor-card__list-item">
-                 <a class="professor-card" href="${item.permalink}">
-                  <img src="${item.image}" alt="" class="professor-card__image">
-                  <span class="professor-card__name">${item.title}</span>
-                 </a>
-               </li>`
-               )
-               .join("")}
+            ${results.professors
+              .map(
+                (item) =>
+                `<li class="professor-card__list-item">
+                <a class="professor-card" href="${item.permalink}">
+                 <img src="${item.image}" alt="" class="professor-card__image">
+                 <span class="professor-card__name">${item.title}</span>
+                </a>
+              </li>`
+              )
+              .join("")}
              ${results.professors.length ? "</ul>" : ""}
           </div>
           <div class="one-third">
