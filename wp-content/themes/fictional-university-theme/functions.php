@@ -206,6 +206,7 @@ function noSubsAdminBar(){
   $ourCurrentUser = wp_get_current_user();
   //count method returns the number of elements in an array:
   if(count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber'){
+    // the commented code below no longer works.
     // show_admin_bar() - Sets the display status of the admin bar.
     // show_admin_bar(false);
     add_filter('show_admin_bar', '__return_false');
