@@ -1,4 +1,5 @@
 <?php
+use function Members\AddOns\AdminAccess\show_admin_bar;
 
 // Important note -  Removed all HTML comments because of errors.
 
@@ -178,3 +179,36 @@ function university_adjust_queries($query)
 // This helps us adjust the queries(this provides a refernce to the Wordpress Query object as well) 
 
 add_action('pre_get_posts', 'university_adjust_queries');
+
+// Redirect subscriber accounts out of admin dashboard and onto homepage
+// first argument - Fires as an admin screen or script is being initialized.
+// second argument - The function we want to call 
+add_action('admin_init', 'redirectSubsToFrontend');
+
+function redirectSubsToFrontend(){
+  //wp_get_current_user()
+  //Retrieves the current user object.
+  $ourCurrentUser = wp_get_current_user();
+  //count method returns the number of elements in an array:
+  if(count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber'){
+    wp_redirect(site_url('/'));
+    //exit/exit() — Output a message and terminate the current script
+    exit;
+  }
+};
+
+//wp_loaded This hook is fired once WP, all plugins, and the theme are fully loaded and instantiated.
+
+add_action('wp_loaded', 'noSubsAdminBar');
+
+function noSubsAdminBar(){
+  //wp_get_current_user()
+  //Retrieves the current user object.
+  $ourCurrentUser = wp_get_current_user();
+  //count method returns the number of elements in an array:
+  if(count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber'){
+    // show_admin_bar() - Sets the display status of the admin bar.
+    // show_admin_bar(false);
+    add_filter('show_admin_bar', '__return_false');
+  }
+};
