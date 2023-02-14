@@ -1,5 +1,4 @@
 <?php
-use function Members\AddOns\AdminAccess\show_admin_bar;
 
 // Important note -  Removed all HTML comments because of errors.
 
