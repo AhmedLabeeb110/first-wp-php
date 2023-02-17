@@ -65,7 +65,10 @@
                    <span class="btn__text">Log Out</span>
                   </a>
                   <?php }  else { ?> 
-                   <a href="<?php echo esc_html(site_url('/wp-signup.php'))?>" class="btn btn--small btn--orange float-left push-right">Login</a>
+                    <!-- Retrieves/Returns the login URL. -->
+                   <a href="<?php echo wp_login_url()?>" class="btn btn--small btn--orange float-left push-right">Sign Up</a>
+                   <!-- Returns the URL that allows the user to register on the site. -->
+                   <a href="<?php echo wp_registration_url()?>" class="btn btn--small btn--dark-orange float-left ">Log in</a>
                   <?php
                   }
                  ?>

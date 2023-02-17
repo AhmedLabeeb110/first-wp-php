@@ -212,3 +212,37 @@ function noSubsAdminBar(){
     add_filter('show_admin_bar', '__return_false');
   }
 };
+
+// Customize Login Screen
+// Wordpress Function
+// 1st Argument: name of the value or object that you want to customize, filter or change in some way. 
+// 2nd Argument: a function that returns whatever you want to use insead. 
+add_filter('login_headerurl', 'ourHeaderUrl');
+
+function ourHeaderUrl(){
+  return esc_url(site_url('/'));
+}
+
+//Customizing the Login page
+
+//login_enqueue_scripts is the proper hook to use when enqueuing items that are meant to appear on 
+// the login page. Despite the name, it is used for enqueuing both scripts and styles, on all login
+// and registration related screens.
+
+add_action('login_enqueue_scripts', 'ourLoginCSS');
+
+function ourLoginCSS(){
+  wp_enqueue_style('custom-google-fonts', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
+  // this is the process of loading font awesome
+  wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+  wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
+  wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css'));
+}
+
+//Change the login page website title
+add_filter('login_headertitle', 'ourLoginTile');
+function ourLoginTile()
+{
+  return get_bloginfo('name');
+}
+ 
