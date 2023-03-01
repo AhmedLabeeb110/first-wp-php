@@ -107,7 +107,10 @@ function university_files()
     array(
       // Retrieves the URL for a given site where WordPress application files (e.g. wp-blog-header.php or the wp-admin/ folder) are accessible. In simple words this function returns the Wordpress Local Website URL
       //Name the property as you like, then pass the get_site_url() as the value
-      'root_url' => get_site_url()
+      'root_url' => get_site_url(),
+      // This is how we create nonce
+      // wp_create_nonce creates a cryptographic token tied to a specific action, user, user session, and window of time.
+      'nonce' => wp_create_nonce('wp_rest')
     )
   );
 }

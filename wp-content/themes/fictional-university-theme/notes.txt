@@ -20,7 +20,13 @@ This is how you can access/load/search all the pages and the posts of a website 
 
 http://fictional-university.local/?s=searchterm
 
+This is how we can access the ten most recent custom posts:
 
+http://fictional-university.local/wp-json/wp/v2/customPostName
+
+If you know the ID of the post that you want to show:
+
+http://fictional-university.local/wp-json/wp/v2/custoPostName/postId
 
 Important Note:
 
