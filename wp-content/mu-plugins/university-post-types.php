@@ -61,6 +61,25 @@
             ),
             'menu_icon' => 'dashicons-welcome-learn-more'
         ));
+
+        // Note Post Type
+        register_post_type('note', array(
+            'supports' => array('title', 'editor'),
+            // setting public to false will make the notes private and specific to each user accounts(fyi we do not want notes to show up in public queries or search results)
+            //However setting public to false will also hide the posts in the admin dashboard    
+            'public' => false,
+            //Setting show_ui to true will show the 'note' post type in the admin dashboard(need to stay signed in as Admin)
+            'show_ui' => true,
+            'show_in_rest' => true,
+            'labels' => array(
+                'name' => 'Notes',
+                'add_new_item' => 'Add New Note',
+                'edit_item' => 'Edit Note',
+                'all_items' => 'All Notes',
+                'singular_name' => 'Note'
+            ),
+            'menu_icon' => 'dashicons-welcome-write-blog'
+        ));
 }
 
 // Run the init hook
