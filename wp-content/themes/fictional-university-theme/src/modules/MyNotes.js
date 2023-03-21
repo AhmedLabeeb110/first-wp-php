@@ -9,6 +9,7 @@ class MyNotes{
       $(".delete-note").on("click", this.deleteNote);
       $(".edit-note").on("click", this.editNote.bind(this))
       $(".update-note").on("click", this.updateNote.bind(this))
+      $(".submit-note").on("click", this.createNote.bind(this))
     }
 
     // Methods will go here
@@ -119,6 +120,54 @@ class MyNotes{
         // Now, go to functions.php and look for wp_localize_script
         success: (response) => {
           // slideUp() is a JQuery function that removes the element from the page using a nice "Slide Up" animation
+          this.makeNoteReadOnly(thisNote)
+          console.log("Congratulations")
+          console.log(response)
+        },
+        error: (response) => {
+          console.log("Sorry")
+          console.log(response)
+        }
+      })
+    }
+
+    createNote(e){
+      
+      var ourNewPost = {
+        //update the title
+        'title': $(".new-note-title").val(),
+        //update the body content
+        'content': $(".new-note-body").val(),
+        //By default every CREATED posts from the frontend get saved as drafts. 
+        //Create the below object to set the type of status in which you want to create posts.
+        //e.g. draft and publish   
+        'status': 'publish'
+      }
+
+      $.ajax({
+        beforeSend: (xhr) => {
+          // This is how you pass down a little bit of extra information with your request.
+          // First argument needs to perfectly match what WordPress is going to be on the lookout for
+          // Second argument: pass the nonce
+          xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
+        },
+        // We named the 'data' attribute as 'data-id' in the HTML, but when we use the JQuery data method we do not need
+        // to write data- as argument
+        url: universityData.root_url + '/wp-json/wp/v2/note/',
+        type: 'POST',
+        // In JS we can send data through APIs using the data property 
+        data: ourNewPost, 
+        // To delete a post, we need to prove to JavaScript that we are logged in.
+        // We do that by passing a NONCE value as argument
+        // NONCE stands for "A number used once or number once"
+        // So, everytime we login successfully WP will generate a Nonce for us  
+        // Now, go to functions.php and look for wp_localize_script
+        success: (response) => {
+          $(".new-note-title, .new-note-body").val('');
+          //The prependTo() method inserts HTML elements at the beginning of the selected elements. Its a JQuery Method
+          // The hide() method hides the selected elements. - JQuery Method
+          // The slideDown() method slides-down (shows) the selected elements. - JQuery Method 
+          $('<li>Imagine real data here</li>').prependTo("#my-notes").hide().slideDown()
           this.makeNoteReadOnly(thisNote)
           console.log("Congratulations")
           console.log(response)
