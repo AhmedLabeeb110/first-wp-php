@@ -111,14 +111,17 @@ class MyNotes {
     this.events();
   }
   events() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".delete-note").on("click", this.deleteNote);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-note").on("click", this.editNote.bind(this));
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".update-note").on("click", this.updateNote.bind(this));
+    // The below line of code means: 
+    // whenever you click anywhere within the parent unordered list(contains andy present or future notes), also it always exists when the page first loads 
+    // And if the interior element matches the delete-note class
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#my-notes").on("click", "delete-note", this.deleteNote);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#my-notes").on("click", ".edit-note", this.editNote.bind(this));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#my-notes").on("click", ".update-note", this.updateNote.bind(this));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".submit-note").on("click", this.createNote.bind(this));
   }
 
   // Methods will go here
-
+  ß;
   //Edit method
   editNote(e) {
     var thisNote = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents("li");
@@ -263,7 +266,17 @@ class MyNotes {
         //The prependTo() method inserts HTML elements at the beginning of the selected elements. Its a JQuery Method
         // The hide() method hides the selected elements. - JQuery Method
         // The slideDown() method slides-down (shows) the selected elements. - JQuery Method 
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()('<li>Imagine real data here</li>').prependTo("#my-notes").hide().slideDown();
+
+        // When an Api request becomes successful, it returns all the data of a post. We can access the data using JS expressions like this
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(`
+           <li data-id="${response.id}">
+            <input readonly class="note-title-field" value="${response.title.raw}">
+            <span class="edit-note"> <i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
+            <span class="delete-note"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</span>
+            <textarea readonly class="note-body-field">${response.content.raw}</textarea>
+            <span class="update-note btn btn--blue btn-small"> <i class="fa fa-arrow-right" aria-hidden="true"></i> Save</span>
+           </li>
+          `).prependTo("#my-notes").hide().slideDown();
         this.makeNoteReadOnly(thisNote);
         console.log("Congratulations");
         console.log(response);
