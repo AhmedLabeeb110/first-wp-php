@@ -248,4 +248,28 @@ function ourLoginTile()
 {
   return get_bloginfo('name');
 }
- 
+
+//Force Note Posts To Be Private
+
+//'wp_insert_post_data' is the name of the filter hook we want to use
+
+//The wp_insert_post_data filter allows you to modify the post data that 
+//is being inserted into the database. You can add, remove or modify any 
+//of the post data, including the post title, post content, post excerpt,
+// post status, post author, post category, post tags, etc.
+
+//passing $data as argument passes all the post data
+add_filter('wp_insert_post_data', 'makeNotePrivate');
+
+// This code will be applicable for all posts if no conditions are passed properly
+// function makeNotePrivate($data){
+//   $data['post_status'] = "private";
+//   return $data;
+// }
+
+function makeNotePrivate($data){
+  if($data['post_type'] == 'note' AND $data['post_status'] != 'trash'){
+    $data['post_status'] = "private"; 
+  }
+  return $data;
+}

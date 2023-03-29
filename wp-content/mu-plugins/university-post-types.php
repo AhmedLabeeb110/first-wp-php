@@ -62,8 +62,14 @@
             'menu_icon' => 'dashicons-welcome-learn-more'
         ));
 
+        //Helpful Note: By default Custom Post types inherit their permissions from blog post type 
+
         // Note Post Type
         register_post_type('note', array(
+            // Set the capability_type to something unique such as event, then explicitly grant these custom capability permissions to each roles as we see fit.  
+            'capability_type' => 'note',
+            //Without this line of code we would need to create custom logic for when the above capabilities should be required
+            'map_meta_cap' => true,
             'supports' => array('title', 'editor'),
             // setting public to false will make the notes private and specific to each user accounts(fyi we do not want notes to show up in public queries or search results)
             //However setting public to false will also hide the posts in the admin dashboard    

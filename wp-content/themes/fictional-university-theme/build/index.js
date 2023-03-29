@@ -241,6 +241,8 @@ class MyNotes {
       //By default every CREATED posts from the frontend get saved as drafts. 
       //Create the below object to set the type of status in which you want to create posts.
       //e.g. draft and publish   
+      // Changing the status from 'public' to 'private' will make all the posts request as private posts, however, this is not the best practise
+      // Becuase we can not rely on a client-side feature to force a status, this can be easily manipulated by hackers. We need to set a desired status from the back-end 
       'status': 'publish'
     };
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
