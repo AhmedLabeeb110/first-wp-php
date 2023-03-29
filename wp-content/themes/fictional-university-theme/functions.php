@@ -251,7 +251,7 @@ function ourLoginTile()
 
 //Force Note Posts To Be Private
 
-//'wp_insert_post_data' is the name of the filter hook we want to use
+//'wp_insert_post_data' is the name of the filter hook we want to use, this hook filters slashed post data just before it is inserted into the database.
 
 //The wp_insert_post_data filter allows you to modify the post data that 
 //is being inserted into the database. You can add, remove or modify any 
@@ -267,6 +267,7 @@ add_filter('wp_insert_post_data', 'makeNotePrivate');
 //   return $data;
 // }
 
+//$data is an array WordPress puts together
 function makeNotePrivate($data){
   if($data['post_type'] == 'note' AND $data['post_status'] != 'trash'){
     $data['post_status'] = "private"; 
