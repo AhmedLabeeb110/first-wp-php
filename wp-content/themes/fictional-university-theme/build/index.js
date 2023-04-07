@@ -114,7 +114,7 @@ class MyNotes {
     // The below line of code means: 
     // whenever you click anywhere within the parent unordered list(contains andy present or future notes), also it always exists when the page first loads 
     // And if the interior element matches the delete-note class
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#my-notes").on("click", "delete-note", this.deleteNote);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#my-notes").on("click", ".delete-note", this.deleteNote);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#my-notes").on("click", ".edit-note", this.editNote.bind(this));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#my-notes").on("click", ".update-note", this.updateNote.bind(this));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".submit-note").on("click", this.createNote.bind(this));

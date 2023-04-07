@@ -55,14 +55,19 @@ while (have_posts()) {
 
                         Also, passing 'readonly' as an attribute makes the input fields readonly 
                     -->
-                    <input readonly class="note-title-field" value="<?php echo esc_attr(get_the_title()); ?>">
+
+                    <!--  
+                       esc_attr() function is the reason why "Private:" gets echoed
+                       To get rid of the "Private:" we made the changes below
+                    -->
+                    <input readonly class="note-title-field" value="<?php echo esc_attr($userNotes->post->post_title); ?>">
                     <!-- 
                         Properly strips all HTML tags including script and style 
                         wp_strip_all_tags()
                     -->
                     <span class="edit-note"> <i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
                     <span class="delete-note"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</span>
-                    <textarea readonly class="note-body-field"><?php echo esc_attr(wp_strip_all_tags(get_the_content()))?></textarea>
+                    <textarea readonly class="note-body-field"><?php echo esc_textarea(get_the_content())?></textarea>
                     <span class="update-note btn btn--blue btn-small"> <i class="fa fa-arrow-right" aria-hidden="true"></i> Save</span>
                 </li>
             <?php

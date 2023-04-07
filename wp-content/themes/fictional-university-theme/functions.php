@@ -269,6 +269,13 @@ add_filter('wp_insert_post_data', 'makeNotePrivate');
 
 //$data is an array WordPress puts together
 function makeNotePrivate($data){
+  if($data['post_type'] == 'note'){
+    //The function is like sanitize_text_field() , but preserves new lines (\n) and other whitespace, which are legitimate input in textarea elements.
+    // Sanitizes a multiline string from user input or from the database.
+     $data['post_content'] = sanitize_textarea_field($data['post_content']);
+     $data['post_title'] = sanitize_textarea_field($data['post_title']);
+  }
+
   if($data['post_type'] == 'note' AND $data['post_status'] != 'trash'){
     $data['post_status'] = "private"; 
   }

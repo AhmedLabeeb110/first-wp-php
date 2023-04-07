@@ -9,7 +9,7 @@ class MyNotes{
       // The below line of code means: 
       // whenever you click anywhere within the parent unordered list(contains andy present or future notes), also it always exists when the page first loads 
       // And if the interior element matches the delete-note class
-      $("#my-notes").on("click", "delete-note", this.deleteNote);
+      $("#my-notes").on("click", ".delete-note", this.deleteNote);
       $("#my-notes").on("click", ".edit-note", this.editNote.bind(this))
       $("#my-notes").on("click", ".update-note", this.updateNote.bind(this))
       $(".submit-note").on("click", this.createNote.bind(this))
