@@ -270,6 +270,10 @@ add_filter('wp_insert_post_data', 'makeNotePrivate');
 //$data is an array WordPress puts together
 function makeNotePrivate($data){
   if($data['post_type'] == 'note'){
+    // Gets the number of posts a user has written. count_user_posts()
+    if(count_user_posts(get_current_user_id(), 'note') > 4){
+
+    };
     //The function is like sanitize_text_field() , but preserves new lines (\n) and other whitespace, which are legitimate input in textarea elements.
     // Sanitizes a multiline string from user input or from the database.
      $data['post_content'] = sanitize_textarea_field($data['post_content']);
