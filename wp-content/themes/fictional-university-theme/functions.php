@@ -34,6 +34,10 @@ function university_custom_rest()
   register_rest_field('post', 'authorName', array(
     'get_callback' => function () { return get_the_author(); }
   ));
+
+  register_rest_field('note', 'userNoteContent', array(
+    'get_callback' => function () { return count_user_posts(get_current_user_id(), 'note'); }
+  ));
 }
 
 // Fires when preparing to serve a REST API request.
@@ -258,8 +262,14 @@ function ourLoginTile()
 //of the post data, including the post title, post content, post excerpt,
 // post status, post author, post category, post tags, etc.
 
+// wp_insert_post_data runs when updating or deleting posts, so for updating and deleting posts the changes need to be made accordingly
+
 //passing $data as argument passes all the post data
-add_filter('wp_insert_post_data', 'makeNotePrivate');
+
+//By default makeNotePrivate function can only take in one parameter/argument but passing 2 as argument will allow us to work with two arguments/parameters  
+//10 is the priority number, this is adjustable and  
+
+add_filter('wp_insert_post_data', 'makeNotePrivate', 10, 2);
 
 // This code will be applicable for all posts if no conditions are passed properly
 // function makeNotePrivate($data){
@@ -267,13 +277,16 @@ add_filter('wp_insert_post_data', 'makeNotePrivate');
 //   return $data;
 // }
 
-//$data is an array WordPress puts together
-function makeNotePrivate($data){
+// $data is an array WordPress puts together
+// wp_insert_post_data generates a second set of data containing the IDs for posts, which we will access by using a second argument called $postarr 
+function makeNotePrivate($data, $postarr){
   if($data['post_type'] == 'note'){
-    // // Gets the number of posts a user has written. count_user_posts()
-    // if(count_user_posts(get_current_user_id(), 'note') > 4){
-
-    // };
+    // Gets the number of posts a user has written. count_user_posts()
+    if(count_user_posts(get_current_user_id(), 'note') > 4 AND !$postarr['ID']){
+      // https://www.w3schools.com/php/func_misc_die.asp
+      // The die() function is an alias of the exit() function.
+      die("You have reached your note limit.");
+    };
     //The function is like sanitize_text_field() , but preserves new lines (\n) and other whitespace, which are legitimate input in textarea elements.
     // Sanitizes a multiline string from user input or from the database.
      $data['post_content'] = sanitize_textarea_field($data['post_content']);
