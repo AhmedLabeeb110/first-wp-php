@@ -114,10 +114,28 @@ class Like {
     }
   }
   createLike() {
-    alert("create test msg");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: universityData.root_url + '/wp-json/university/v1/manageLike',
+      type: 'POST',
+      success: response => {
+        console.log(response);
+      },
+      error: response => {
+        console.log(response);
+      }
+    });
   }
   deleteLike() {
-    alert("delete test msg");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: universityData.root_url + '/wp-json/university/v1/manageLike',
+      type: 'DELETE',
+      success: () => {
+        console.log(response);
+      },
+      error: () => {
+        console.log(response);
+      }
+    });
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (Like);

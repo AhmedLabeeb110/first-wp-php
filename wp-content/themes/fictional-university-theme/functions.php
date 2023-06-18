@@ -24,6 +24,7 @@
 // This built-in Wordpress Function Retrieves the path of a file in the theme.
 
 require get_theme_file_path('/inc/search-route.php');
+require get_theme_file_path('/inc/like-route.php');
 
 function university_custom_rest()
 {
@@ -267,7 +268,7 @@ function ourLoginTile()
 //passing $data as argument passes all the post data
 
 //By default makeNotePrivate function can only take in one parameter/argument but passing 2 as argument will allow us to work with two arguments/parameters  
-//10 is the priority number, this is adjustable and  
+// The 10 parameter specifies the priority of the filter. The higher the priority, the earlier the filter will be executed. The 2 parameter specifies the number of arguments that the filter function will receive.
 
 add_filter('wp_insert_post_data', 'makeNotePrivate', 10, 2);
 
@@ -279,6 +280,10 @@ add_filter('wp_insert_post_data', 'makeNotePrivate', 10, 2);
 
 // $data is an array WordPress puts together
 // wp_insert_post_data generates a second set of data containing the IDs for posts, which we will access by using a second argument called $postarr 
+
+
+// The third line of code, if ($num_notes > 4 && !$postarr['ID']), checks if the number of notes is greater than 4, and if the post is not an existing post. If both of these conditions are met, then the function will die with a message that the user has reached their note limit.
+
 function makeNotePrivate($data, $postarr){
   if($data['post_type'] == 'note'){
     // Gets the number of posts a user has written. count_user_posts()
