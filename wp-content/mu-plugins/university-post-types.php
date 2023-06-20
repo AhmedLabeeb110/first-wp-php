@@ -87,7 +87,7 @@
             'menu_icon' => 'dashicons-welcome-write-blog'
         ));
 
-        // Note Post Type
+        // Like Post Type
         register_post_type('Like', array(
             'supports' => array('title'),
             'public' => false,
