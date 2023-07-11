@@ -115,6 +115,12 @@ class Like {
   }
   createLike(currentLikeBox) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      beforeSend: xhr => {
+        // This is how you pass down a little bit of extra information with your request.
+        // First argument needs to perfectly match what WordPress is going to be on the lookout for
+        // Second argument: pass the nonce
+        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
+      },
       url: universityData.root_url + '/wp-json/university/v1/manageLike',
       type: 'POST',
       data: {

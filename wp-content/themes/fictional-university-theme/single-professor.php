@@ -39,26 +39,30 @@ while (have_posts()) {
 
           $existStatus = 'no';
 
-          $existQuery = new WP_Query(
-            array(
-              'author' => get_current_user_id(),
-              'post_type' => 'like',
-              'meta_query' => array(
-                array(
-                  'key' => 'liked_professor_id',
-                  'compare' => '=',
-                  'value' => get_the_ID()
+          if (is_user_logged_in()) {
+            $existQuery = new WP_Query(
+              array(
+                'author' => get_current_user_id(),
+                'post_type' => 'like',
+                'meta_query' => array(
+                  array(
+                    'key' => 'liked_professor_id',
+                    'compare' => '=',
+                    'value' => get_the_ID()
+                  )
                 )
               )
-            )
-          );
+            );
 
-          if ($existQuery->found_posts) {
-            $existStatus = 'yes';
+            if ($existQuery->found_posts) {
+              $existStatus = 'yes';
+            }
           }
+
+
           ?>
 
-   <!-- 
+          <!-- 
      The data-exists attribute is a custom attribute that can be used to store data on an element. 
      It is not part of the HTML standard, but is supported by most browsers. 
      The data-exists attribute is prefixed with the word "data-" to avoid conflicts with standard HTML attributes.
@@ -66,7 +70,7 @@ while (have_posts()) {
      The data is stored as a key-value pair, where the key is the name of the attribute and the value is the data itself. 
     -->
 
-          <span class="like-box" data-professor="<?php the_ID();?>" data-exists="<?php echo $existStatus; ?>">
+          <span class="like-box" data-professor="<?php the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
             <li class="fa fa-heart-o" aria-hidden="true"></li>
             <li class="fa fa-heart" aria-hidden="true"></li>
             <!-- found_posts attribute shows the total number of posts the query found, also this property ignores pagination  -->
