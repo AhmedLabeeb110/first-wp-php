@@ -53,10 +53,13 @@ function createLike($data){
       )
     );
     
-    if($existQuery->found_posts == 0 AND get_post_type($professor === 'professor')){
+    // fixed the condition for fixing like not working issue
+
+    if($existQuery->found_posts == 0 AND get_post_type($professor) == 'professor'){
       // Create new like post
       return wp_insert_post(array(
         'post_type' => 'like',
+        'post_status' => 'publish',
         'post_title' => '2nd PHP Test',
         // This is create WordPress Native Custom Fields/Meta Fields
         // This is used for creating key value pairs
@@ -79,6 +82,19 @@ function createLike($data){
   }
 }
 
-function deleteLike(){
-  return 'Thanks for deleting a Like';
+function deleteLike($data){
+  $likeId = sanitize_text_field($data['like']);
+  // wp_delete_post(); function is used to delete WP posts.
+  // 1st argument - ID of the post you want to delete
+  // 2nd argument - if you want to send it to "TRASH" first or do you want to completely delete it. By passing true you are skipping the trash 
+ 
+  // get_post_field() takes is two arguments
+  // 1st argument - first argument is what information you want about the post
+  // 2nd argument - ID of the post you want information about
+  if(get_current_user_id() == get_post_field('post_author', $likeId) AND get_post_type($likeId) == 'like'){
+    wp_delete_post($likeId, true);
+    return "Congrats! Like deleted.";
+  } else {
+    die("you do not have the permission to delete the post");
+  }
 }

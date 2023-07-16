@@ -26,7 +26,8 @@ class Like {
 
     var currentLikeBox = $(e.target).closest(".like-box");
 
-    if (currentLikeBox.data("exists") == "yes") {
+    //JQuery data method only looks at the data attribute values once when the page first loads, so in the code below we will be using a attr method instead
+    if (currentLikeBox.attr("data-exists") == "yes") {
       this.deleteLike(currentLikeBox);
     } else {
       this.createLike(currentLikeBox);
@@ -45,6 +46,16 @@ class Like {
       type: 'POST',
       data: { 'professorId' : currentLikeBox.data('professor') },
       success: (response) => {
+        currentLikeBox.attr('data-exists', 'yes');
+        // parseInt() is a JS method that parses a string to number
+        // we nee to pass in two arguments within it
+        // first argument - the string of text you want to convert into number
+        // second argument - the number you want to use as your base - the most preferred number is 10 as humans mostly use number system based around 10.
+        var likeCount = parseInt(currentLikeBox.find(".like-count").html(), 10);
+        likeCount++;
+        currentLikeBox.find(".like-count").html(likeCount);
+        // the wordpress server sends the ID number of the new post as response that's why we are passing the ID as second argument
+        currentLikeBox.attr("data-like", response);
         console.log(response)
       },
       error: (response) => {
@@ -53,14 +64,28 @@ class Like {
     })
   }
 
-  deleteLike() {
+
+  deleteLike(currentLikeBox) {
     $.ajax({
-      url: universityData.root_url + '/wp-json/university/v1/manageLike',
-      type: 'DELETE',
-      success: () => {
-        console.log(response)
+      beforeSend: (xhr) => {
+        // This is how you pass down a little bit of extra information with your request.
+        // First argument needs to perfectly match what WordPress is going to be on the lookout for
+        // Second argument: pass the nonce
+        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
       },
-      error: () => {
+      url: universityData.root_url + '/wp-json/university/v1/manageLike',
+      data: {'like': currentLikeBox.attr('data-like')},
+      type: 'DELETE',
+      success: (response) => {
+        console.log(response)
+        // Copied and pasted the code from above and made changes accordingly
+        currentLikeBox.attr('data-exists', 'no');
+        var likeCount = parseInt(currentLikeBox.find(".like-count").html(), 10);
+        likeCount--;
+        currentLikeBox.find(".like-count").html(likeCount);
+        currentLikeBox.attr("data-like", '');
+      },
+      error: (response) => {
         console.log(response)
       }
     })

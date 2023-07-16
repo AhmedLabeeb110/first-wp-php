@@ -70,7 +70,7 @@ while (have_posts()) {
      The data is stored as a key-value pair, where the key is the name of the attribute and the value is the data itself. 
     -->
 
-          <span class="like-box" data-professor="<?php the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
+          <span class="like-box" data-like="<?php echo $existQuery->posts[0]->ID;?>" data-professor="<?php the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
             <li class="fa fa-heart-o" aria-hidden="true"></li>
             <li class="fa fa-heart" aria-hidden="true"></li>
             <!-- found_posts attribute shows the total number of posts the query found, also this property ignores pagination  -->
